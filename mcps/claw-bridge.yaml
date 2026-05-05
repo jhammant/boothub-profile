@@ -1,0 +1,23 @@
+id: claw-bridge
+description: |
+  Distributed task broker for inter-agent communication. Tailscale-private HTTP API
+  with a SQLite queue. Tools: bridge_send, bridge_read, bridge_status, bridge_tasks,
+  bridge_context.
+
+claude-code:
+  scope: user
+  config:
+    command: node
+    args:
+      - "{{HOME}}/dev/claw-bridge/mcp-bridge/index.js"
+
+cursor:
+  config:
+    command: node
+    args:
+      - "{{HOME}}/dev/claw-bridge/mcp-bridge/index.js"
+
+template_vars:
+  - HOME
+
+post: "Run /bridge_status to verify the broker is reachable on your Tailnet."

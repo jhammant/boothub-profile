@@ -1,0 +1,20 @@
+id: claude-history
+description: |
+  Cross-session knowledge MCP with cloud sync. Tools: search_history, find_solutions,
+  get_session_summary, list_projects, find_patterns, get_project_context, plus
+  cloud_sync_push/pull/status.
+
+claude-code:
+  scope: user
+  config:
+    command: node
+    args:
+      - "{{HOME}}/dev/ClaudeHistoryMCP/dist/index.js"
+
+template_vars:
+  - HOME
+
+env_required:
+  - CLAUDE_HISTORY_CLOUD_TOKEN
+
+post: "If you don't have the age key, set CLAUDE_HISTORY_CLOUD_TOKEN manually in your shell."
