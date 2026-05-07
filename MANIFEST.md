@@ -125,11 +125,11 @@ bundles:
     secrets:
       CLAUDE_HISTORY_CLOUD_TOKEN: |
         -----BEGIN AGE ENCRYPTED FILE-----
-        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBncVhkdGkwWmtRZXAvVUVY
-        UTVEU0FBQnR3cFluYjYvUmszYnpHRDVpYXpRCmN3elFhT1ZzdDM1WGxuc2JYemZC
-        SHZ1MVVhUk5EVVk5ck5ad3dOdUdYMEEKLS0tIHViNU5VQ1dWeWRHUmlPU2ZyR0l0
-        T0ErT0Q0K3d1cThHeDhzVjNObEZYaWMK6M/lgUNGeT2FWVqLsM/AfVj9JHTqHhth
-        TN4mSu5bODrY7p2XBRHIYIF2Oh2l/44GP9rmtmitr9zHD6X44nIAwtkN
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBmM25nT2RPMGJBaTRPZXdr
+        OEgzRksvcTlxNDFUcDI5T2dsYkwvYnUraVhZCnZiYk1WWG1lQ3ZZNXZrRjdIZ1FR
+        cW1EaTN1SEdpaVJCbE9reGpPNWJCekEKLS0tIDEweEVUU0JnR2o3bFVQM3h4Q09I
+        bGZ5UWFDRWFLd1ZabDdCaThFaHlzVnMKyzTAd3nptS8o+FLJbogRKsqvfPF6RFQm
+        6ryMwmw7HRMA+b626RjnAI6QxhSSqTpgozeLyV61QvdnxDL12jSmkJIN6w==
         -----END AGE ENCRYPTED FILE-----
     post: "If you have my age private key, the secret decrypts. Otherwise set CLAUDE_HISTORY_CLOUD_TOKEN manually."
 
