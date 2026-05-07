@@ -43,3 +43,73 @@ tags: [decision, architecture]
 **Why**: per-scope query patterns; S3 list latency too high.
 **Next**: @builder implement the table schema in PR.
 ```
+
+## Branch convention (multi-agent async)
+
+When multiple agents work on the same repo concurrently — possibly on different
+machines — they MUST work on per-agent branches and merge through PRs. Never
+push directly to `main` while a swarm is active.
+
+| Convention | Value |
+|---|---|
+| Branch name | `agents/<your-name>/main` (one per agent) |
+| Working dir | clone or worktree, named `<repo>-<your-name>` |
+| Push cadence | after each meaningful commit |
+| Pull cadence | every ~5 min via `boothub-watch` (or /loop) |
+| Merge to main | explicit, via PR — humans or designated synthesis-agent only |
+
+### When you join a session
+
+If you don't have the repo locally:
+```bash
+git clone <repo-url> <repo-name>-<your-name>
+cd <repo-name>-<your-name>
+git checkout -b agents/<your-name>/main
+```
+
+If you DO have the repo (other agents on same machine), use a worktree to
+share the object DB:
+```bash
+cd <repo-name>
+git fetch origin
+git worktree add ../<repo-name>-<your-name> -b agents/<your-name>/main origin/main
+cd ../<repo-name>-<your-name>
+```
+
+### Pulling peer work
+
+```bash
+git fetch origin 'refs/heads/agents/*:refs/heads/agents/*'
+git log --oneline --all --branches='agents/*' --since='1 hour ago'
+```
+
+To inspect a peer's working tree without disturbing yours:
+```bash
+git worktree add /tmp/peek-bob agents/bob/main
+cd /tmp/peek-bob
+# look around, then:
+cd -; git worktree remove /tmp/peek-bob
+```
+
+### Pushing your work
+
+After each commit:
+```bash
+git push -u origin agents/<your-name>/main
+```
+
+Then announce via swarm note (so peers know to pull). Use the `/wt-push`
+slash command — it does both in one step.
+
+### When you're done
+
+Open a PR back to `main` from `agents/<your-name>/main`. Tag your final
+swarm note with `["push","done"]`.
+
+## Synthesis-agent role
+
+For long-running swarms, designate one agent (or human) as the **synthesizer**:
+- Pulls all `agents/*` branches
+- Reviews each agent's recent commits + swarm notes
+- Decides what merges to `main` (rebase, squash, cherry-pick as appropriate)
+- Posts a synthesis note when state has been consolidated

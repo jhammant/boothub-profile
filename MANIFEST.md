@@ -21,12 +21,13 @@ summary: |
 presets:
   default: [skills, commands, project-context]
   lite: [commands]
-  swarm: [skills, commands, project-context, github-memory]
+  swarm: [skills, commands, project-context, github-memory, git-worktree-swarm]
   swarm-pro:
     - skills
     - commands
     - project-context
     - github-memory
+    - git-worktree-swarm
     - hosted-swarm
     - openclaw-personas
     - claw-bridge
@@ -53,6 +54,14 @@ bundles:
     files:
       - { path: CLAUDE.md, from: project/CLAUDE.md }
       - { path: AGENTS.md, from: agents/AGENTS.md }
+
+  - id: git-worktree-swarm
+    kind: files
+    files:
+      - { path: .claude/skills/swarm-branch.md, from: skills/swarm-branch.md }
+      - { path: .claude/commands/wt-push.md, from: commands/wt-push.md }
+      - { path: .claude/commands/wt-pull.md, from: commands/wt-pull.md }
+    post: "Multi-agent async collab: each agent works on agents/<your-name>/main. Run /wt-push to commit + announce; /wt-pull to fetch peer branches."
 
   - id: openclaw-personas
     kind: files
